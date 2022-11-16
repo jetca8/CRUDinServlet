@@ -47,10 +47,12 @@ public class UpdateCourse extends HttpServlet {
             out.println("<h1>Servlet UpdateCourse at " + request.getContextPath() + "</h1>");
 
             HttpSession hs = request.getSession();
-            CredentialsDTO creds = (CredentialsDTO) hs.getAttribute("creds");
+            CredentialsDTO creds = new CredentialsDTO();
+            creds.setUsername((String)hs.getAttribute("username"));
+            creds.setPassword((String)hs.getAttribute("password"));
             CourseBusinessLogic logic = new CourseBusinessLogic(creds);
             List<CourseDto> courseList = logic.getAll();
-            int i = 0;
+            int i = 0; //get the number that equal the value from the submitted form
             while (courseList.iterator().hasNext())
 //            for (CourseDto courseInList : courseList) 
             {

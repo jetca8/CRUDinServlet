@@ -17,7 +17,9 @@ import transferobjects.CredentialsDTO;
 import transferobjects.CourseDto;
 
 /**
- * display all the current course in the table, and insert, delete and update forms.
+ * display all the current course in the table, and insert, delete and update
+ * forms.
+ *
  * @author Jian Zhou (zhou0124@algonquinlive.com)
  */
 public class ShowCourse extends HttpServlet {
@@ -48,19 +50,37 @@ public class ShowCourse extends HttpServlet {
 
             creds.setUsername(request.getParameter("username"));
             creds.setPassword(request.getParameter("password"));
-            
-            
+
             HttpSession hs = request.getSession();
-            out.println("<p> creds data: " + creds.getUsername() + creds.getPassword() + "</p>");
-            if(hs.getAttribute("creds") == null) {
-                hs.setAttribute("creds", creds);
-//                out.println("<p> null" + creds.getUsername() + creds.getPassword() + "</p>");
+            
+            String username;
+            String password;
+            
+            if (hs.getAttribute("username") == null) {
+                hs.setAttribute("username", creds.getUsername());
+                hs.setAttribute("password", creds.getPassword());
+                out.println("<p> null, first time, save pass from form, username: " + hs.getAttribute("username") + "password: " +hs.getAttribute("password") + "</p>");
+                
             } else {
-                creds = (CredentialsDTO) hs.getAttribute("creds");
-//                out.println("<p> creds is not null, " + creds.getUsername() + creds.getPassword() + "</p>");
+                creds.setUsername((String)hs.getAttribute("username"));
+                creds.setPassword((String)hs.getAttribute("password"));
+                out.println("<p> not null " + creds.getUsername() + creds.getPassword() + "</p>");
             }
+            // Integer is an immutable data structure. So, you
+            // cannot modify the old one in-place. Instead, you
+            // have to allocate a new one and redo setAttribute.
+//            HttpSession hs = request.getSession();
+            out.println("<p> hs id: " + hs.getId() + "</p>");
+            out.println("<p> creds data: " + creds.getUsername() + creds.getPassword() + "</p>");
             
             
+//            if (null == (CredentialsDTO) hs.getAttribute("creds")) {
+//                hs.setAttribute("creds", creds);
+////                out.println("<p> null" + creds.getUsername() + creds.getPassword() + "</p>");
+//            } else {
+//                creds = (CredentialsDTO) hs.getAttribute("creds");
+////                out.println("<p> creds is not null, " + creds.getUsername() + creds.getPassword() + "</p>");
+//            }
 
             CourseBusinessLogic logic = new CourseBusinessLogic(creds);
 
@@ -72,15 +92,11 @@ public class ShowCourse extends HttpServlet {
             CourseTool.displayDeleteForm(out);
             CourseTool.displayUpdateForm(out, courseList);
             CourseTool.displayRefreshButton(out);
-            
+
             out.println("</body>");
             out.println("</html>");
         }
     }
-
-    
-
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

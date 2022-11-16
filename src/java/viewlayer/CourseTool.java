@@ -101,7 +101,7 @@ public class CourseTool {
                 out.println("</tr>");
             }
             out.printf("<tr>"
-                    + "<td><input type=\"text\" name=\"updateCourseCode\" value=\"%s\"></td>"
+                    + "<td><input type=\"text\" name=\"updateCourseCode\" placeholder=\"%s\" readonly></td>"
                     + "<td><input type=\"text\" name=\"updateCourseName\" value=\"%s\"></td>"
                     + "<td><input type=\"text\" name=\"updateCourseDescription\" value=\"%s\"></td>"
                     + "<td><input type=\"hidden\" name=\"index\" value=\"%d\"> <input type=\"submit\" value=\"Update\"></td>"

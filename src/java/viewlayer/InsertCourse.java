@@ -48,7 +48,9 @@ public class InsertCourse extends HttpServlet {
             out.println("<h1>Servlet InsertCourse at " + request.getContextPath() + "</h1>");
 
             HttpSession hs = request.getSession();
-            CredentialsDTO creds = (CredentialsDTO) hs.getAttribute("creds");
+            CredentialsDTO creds = new CredentialsDTO();
+            creds.setUsername((String)hs.getAttribute("username"));
+            creds.setPassword((String)hs.getAttribute("password"));
             CourseBusinessLogic logic = new CourseBusinessLogic(creds);
 //            out.println("<p>" + creds.getUsername() + creds.getPassword() + "</p>");
 
