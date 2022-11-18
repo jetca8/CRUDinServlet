@@ -86,7 +86,7 @@ public class CourseTool {
  * @param courseList course list to be update
  */
     public static void displayUpdateForm(final PrintWriter out, List<CourseDto> courseList) {
-        out.println("<p>Update course info:</p>");
+        out.println("<p>Update course info (course code should not be changed):</p>");
 
         int i = 0;
         for (CourseDto courseInList : courseList) {
@@ -101,7 +101,7 @@ public class CourseTool {
                 out.println("</tr>");
             }
             out.printf("<tr>"
-                    + "<td><input type=\"text\" name=\"updateCourseCode\" placeholder=\"%s\" readonly></td>"
+                    + "<td><input type=\"text\" name=\"updateCourseCode\" value=\"%s\" readonly></td>"
                     + "<td><input type=\"text\" name=\"updateCourseName\" value=\"%s\"></td>"
                     + "<td><input type=\"text\" name=\"updateCourseDescription\" value=\"%s\"></td>"
                     + "<td><input type=\"hidden\" name=\"index\" value=\"%d\"> <input type=\"submit\" value=\"Update\"></td>"

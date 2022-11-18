@@ -53,34 +53,20 @@ public class ShowCourse extends HttpServlet {
 
             HttpSession hs = request.getSession();
             
-            String username;
-            String password;
+
             
             if (hs.getAttribute("username") == null) {
                 hs.setAttribute("username", creds.getUsername());
                 hs.setAttribute("password", creds.getPassword());
-                out.println("<p> null, first time, save pass from form, username: " + hs.getAttribute("username") + "password: " +hs.getAttribute("password") + "</p>");
                 
             } else {
                 creds.setUsername((String)hs.getAttribute("username"));
                 creds.setPassword((String)hs.getAttribute("password"));
-                out.println("<p> not null " + creds.getUsername() + creds.getPassword() + "</p>");
             }
-            // Integer is an immutable data structure. So, you
-            // cannot modify the old one in-place. Instead, you
-            // have to allocate a new one and redo setAttribute.
-//            HttpSession hs = request.getSession();
-            out.println("<p> hs id: " + hs.getId() + "</p>");
-            out.println("<p> creds data: " + creds.getUsername() + creds.getPassword() + "</p>");
+
             
             
-//            if (null == (CredentialsDTO) hs.getAttribute("creds")) {
-//                hs.setAttribute("creds", creds);
-////                out.println("<p> null" + creds.getUsername() + creds.getPassword() + "</p>");
-//            } else {
-//                creds = (CredentialsDTO) hs.getAttribute("creds");
-////                out.println("<p> creds is not null, " + creds.getUsername() + creds.getPassword() + "</p>");
-//            }
+
 
             CourseBusinessLogic logic = new CourseBusinessLogic(creds);
 

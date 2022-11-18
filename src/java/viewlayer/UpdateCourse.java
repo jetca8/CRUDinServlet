@@ -50,9 +50,10 @@ public class UpdateCourse extends HttpServlet {
             CredentialsDTO creds = new CredentialsDTO();
             creds.setUsername((String)hs.getAttribute("username"));
             creds.setPassword((String)hs.getAttribute("password"));
+            
             CourseBusinessLogic logic = new CourseBusinessLogic(creds);
             List<CourseDto> courseList = logic.getAll();
-            int i = 0; //get the number that equal the value from the submitted form
+            int i = 0; 
             while (courseList.iterator().hasNext())
 //            for (CourseDto courseInList : courseList) 
             {
@@ -61,7 +62,7 @@ public class UpdateCourse extends HttpServlet {
                     course.setCourseCode(request.getParameter("updateCourseCode"));
                     course.setCourseName(request.getParameter("updateCourseName"));
                     course.setCourseDescription(request.getParameter("updateCourseDescription"));
-                    out.println("<p> course # " + i + course.getCourseCode() + course.getCourseName() + " is updated.</p>");
+                    out.println("<p> index # " + i  +"coursecode "+ course.getCourseCode()  +"coursename " + course.getCourseName() + " is updated.</p>");
                     logic.update(course);
                     out.println("<p> record # " + i + " is updated.</p>");
                     break;

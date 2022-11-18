@@ -19,6 +19,7 @@ import viewlayer.ShowCourse;
 
 /**
  * insert new record in the course table
+ *
  * @author Jian Zhou (zhou0124@algonquinlive.com)
  */
 public class InsertCourse extends HttpServlet {
@@ -38,7 +39,6 @@ public class InsertCourse extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -49,10 +49,9 @@ public class InsertCourse extends HttpServlet {
 
             HttpSession hs = request.getSession();
             CredentialsDTO creds = new CredentialsDTO();
-            creds.setUsername((String)hs.getAttribute("username"));
-            creds.setPassword((String)hs.getAttribute("password"));
+            creds.setUsername((String) hs.getAttribute("username"));
+            creds.setPassword((String) hs.getAttribute("password"));
             CourseBusinessLogic logic = new CourseBusinessLogic(creds);
-//            out.println("<p>" + creds.getUsername() + creds.getPassword() + "</p>");
 
             List<CourseDto> courseList = logic.getAll();
             CourseDto course = new CourseDto();
@@ -61,7 +60,7 @@ public class InsertCourse extends HttpServlet {
             course.setCourseDescription(request.getParameter("courseDescription"));
 
             logic.add(course);
-            out.println("<p> CourseCode " + request.getParameter("courseCode") +  " is inserted.</p>");
+            out.println("<p> CourseCode " + request.getParameter("courseCode") + " is inserted.</p>");
             courseList = logic.getAll();
             CourseTool.displayCourseList(out, courseList);
             CourseTool.displayReturn(out);
